@@ -48,7 +48,8 @@ RUN apt-get update && \
     libxext6 \
     libboost-all-dev \
     cifs-utils \
-    software-properties-common
+    software-properties-common \
+    cython
 
 RUN add-apt-repository ppa:deadsnakes/ppa -y && \
 # Installing python3.11
@@ -84,7 +85,6 @@ RUN pip install \
     pillow==9.2.0 \
     seaborn==0.12.0 \
     tabulate==0.9.0 \
-    gradient==2.0.6 \
     jsonify==0.5 \
     wandb==0.13.4 \
     jupyterlab-snippets==0.4.1 

@@ -5,7 +5,7 @@ ENV LANG C.UTF-8
 ENV SHELL=/bin/bash
 ENV DEBIAN_FRONTEND=noninteractive
 ENV APT_INSTALL="apt-get install -y --no-install-recommends"
-ENV PIP_INSTALL="python3 -m pip --no-cache-dir install --upgrade"
+ENV PIP_INSTALL="python -m pip --no-cache-dir install --upgrade"
 ENV GIT_CLONE="git clone --depth 10"
 
 # installing base operation packages
@@ -65,38 +65,29 @@ RUN ln -s /usr/bin/python3.10 /usr/local/bin/python3 && \
 RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3.10
 ENV PATH=$PATH:/root/.local/bin
 
+# Update setuptools
+RUN pip install --upgrade setuptools
+
 # Installing pip packages
+
+
 RUN $PIP_INSTALL git+https://github.com/guorbit/utilities.git
-RUN $PIP_INSTALL \
+RUN pip install \
+    cython\
     numpy==1.23.4 \
-    scipy==1.9.2 \
     pandas==1.5.0 \
-    cloudpickle==2.2.0 \
-    scikit-image \
     matplotlib==3.6.1 \
     ipython==8.5.0 \
     ipykernel==6.16.0 \
     ipywidgets==8.0.2 \
-    cython==0.29.32 \
     tqdm==4.64.1 \
-    gdown \
-    xgboost==1.6.2 \
     pillow==9.2.0 \
     seaborn==0.12.0 \
-    sqlalchemy==1.4.41 \
-    spacy==3.4.1 \
-    nltk==3.7 \
-    boto3==1.24.90 \
     tabulate==0.9.0 \
-    future==0.18.2 \
     gradient==2.0.6 \
     jsonify==0.5 \
-    opencv-python==4.6.0.66 \
-    sentence-transformers==2.2.2 \
     wandb==0.13.4 \
-    awscli==1.25.91 \
-    jupyterlab-snippets==0.4.1 \
-    tornado==6.1
+    jupyterlab-snippets==0.4.1 
 
 RUN $APT_INSTALL \
     default-jre \

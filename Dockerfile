@@ -10,46 +10,6 @@ ENV GIT_CLONE="git clone --depth 10"
 
 # installing base operation packages
 
-RUN apt-get update && \
-    $APT_INSTALL \
-    apt-utils \
-    gcc \
-    make \
-    pkg-config \
-    apt-transport-https \
-    build-essential \
-    ca-certificates \
-    wget \
-    rsync \
-    git \
-    vim \
-    mlocate \
-    libssl-dev \
-    curl \
-    openssh-client \
-    unzip \
-    unrar \
-    zip \
-    csvkit \
-    emacs \
-    joe \
-    jq \
-    dialog \
-    man-db \
-    manpages \
-    manpages-dev \
-    manpages-posix \
-    manpages-posix-dev \
-    nano \
-    iputils-ping \
-    sudo \
-    ffmpeg \
-    libsm6 \
-    libxext6 \
-    libboost-all-dev \
-    cifs-utils \
-    software-properties-common \
-    cython
 
 RUN add-apt-repository ppa:deadsnakes/ppa -y && \
 # Installing python3.11
@@ -89,14 +49,6 @@ RUN pip install \
     wandb==0.13.4 \
     jupyterlab-snippets==0.4.1 
 
-RUN $APT_INSTALL \
-    default-jre \
-    default-jdk
-
-RUN $GIT_CLONE https://github.com/Kitware/CMake ~/cmake && \
-    cd ~/cmake && \
-    ./bootstrap && \
-    make -j"$(nproc)" install
 
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash  && \
     $APT_INSTALL nodejs  && \
